@@ -16,6 +16,9 @@ public class Student implements java.io.Serializable {
     // Setters
     public void setStdId(int stdID) {
         //exception handle
+        if(stdID < 0){
+            throw new IllegalArgumentException("Student ID must be a positive value: " + stdID);
+        }
         this.stdID = stdID;
     }
 

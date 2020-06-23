@@ -1,4 +1,5 @@
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
@@ -20,9 +21,12 @@ public class StudentDeserializer {
                     //     e.printStackTrace();
                     // }
                     // Method for deserialization of object 
-                    // for (Student student : (Student)in.readObject()){
-                    //     studentArrayList.add(student);
-                    // }
+                    try {
+                        studentArrayList.add((Student)in.readObject());
+                    } catch (Exception e) {
+                        //TODO: handle exception
+                    }{
+                    }
                       
                     in.close(); 
                     file.close(); 
@@ -38,10 +42,10 @@ public class StudentDeserializer {
                     System.out.println("IOException is caught"); 
                 } 
                   
-                catch(ClassNotFoundException ex) 
-                { 
-                    System.out.println("ClassNotFoundException is caught"); 
-                } 
+                // catch(ClassNotFoundException ex) 
+                // { 
+                //     System.out.println("ClassNotFoundException is caught"); 
+                // } 
     }
     
 }

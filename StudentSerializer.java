@@ -1,4 +1,3 @@
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -26,7 +25,13 @@ public class StudentSerializer {
             ObjectOutputStream out = new ObjectOutputStream(file);
 
             // Method for serialization of object
-            out.writeObject(studentArrayList);
+            try {
+                for (Student student : studentArrayList) {
+                    out.writeObject(student);
+                }
+            } catch (NullPointerException e) {
+                e.printStackTrace();
+            }
             out.close();
             file.close();
 
@@ -40,6 +45,7 @@ public class StudentSerializer {
 
     }
 
+    /** Sets each field and creates a new index in the arraylist. */
     public static void addStudents() {
         boolean isMore = true;
         sc = new Scanner(System.in);
@@ -53,6 +59,10 @@ public class StudentSerializer {
         sc.close();
     }
 
+    /**
+     * Sets courses field by getting a string and adding each course into an
+     * arraylist
+     */
     public static void setCourses() {
         courses = new ArrayList<String>();
         String stringCourses;
@@ -64,9 +74,13 @@ public class StudentSerializer {
                 courses.add(course);
             }
         }
-        
+
     }
 
+    /**
+     * Asks the user if he wants to add more students. Only accepts y or n. Requests
+     * user until it gets appropriate input.
+     */
     public static boolean isMore(boolean isMore) {
         boolean done = false;
         char choice;
@@ -87,6 +101,10 @@ public class StudentSerializer {
         return isMore;
     }
 
+    /**
+     * Sets the studentID field by converting string into integer. Catches format
+     * exceptions and asks until it gets the proper input.
+     */
     public static void setStudentID() {
         boolean isTrue = true;
         do {
@@ -99,15 +117,15 @@ public class StudentSerializer {
                 isTrue = false;
             }
         } while (isTrue == false);
-        
+
     }
 
     public static void setName() {
-        
+
         System.out.println("Enter Student Firstname");
         firstName = sc.nextLine();
         System.out.println("Enter Student Lastname");
         lastName = sc.nextLine();
-        
+
     }
 }
